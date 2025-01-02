@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/Userrouter');
+const postRoutes = require('./src/routes/Postrouter');
 
 const app = express();
 const port = 5000;
@@ -13,6 +14,7 @@ app.use(cors());
 
 //routes
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 
 //Connect to DB
