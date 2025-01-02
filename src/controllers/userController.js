@@ -28,8 +28,22 @@ const getUserDetails = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+const updateUser = async (req, res) => {
+    const id = req.params.id;
+    const updatedData = req.body;
+    try {
+        const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 module.exports = {
     getAllUsers,
     createUser,
-    getUserDetails
+    getUserDetails,
+    updateUser
 };
