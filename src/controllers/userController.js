@@ -16,7 +16,20 @@ const createUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+const getUserDetails = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const Users = await User.findById(id);
+        if (!Users) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(Users);
+    }catch(error){
+        res.status(500).json({ message: error.message });
+    }
+}
 module.exports = {
     getAllUsers,
-    createUser
+    createUser,
+    getUserDetails
 };
